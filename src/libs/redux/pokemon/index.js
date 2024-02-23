@@ -1,29 +1,48 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import pokemon from '../../axios';
+import {PATH} from '../../../services/api/path';
 
 export const fetchPokemon = createAsyncThunk(
   'posts/fetchPokemon',
   async ({limit, offset}) => {
     try {
       const response = await pokemon.get(
-        `/pokemon/?limit=${limit}&offset=${offset}`,
+        `${PATH.POKEMON}/?limit=${limit}&offset=${offset}`,
       );
+      const pokemonList = response.data.results;
 
-      return response.data.results;
+      const detailPromises = pokemonList.map(async pokemonItem => {
+        const detailResponse = await pokemon.get(
+          `${PATH.POKEMON}/${pokemonItem.name}`,
+        );
+        return {
+          id: detailResponse.data.id,
+          name: detailResponse.data.name,
+          image: detailResponse.data.sprites.other.dream_world.front_default,
+        };
+      });
+
+      const pokemonWithDetails = await Promise.all(detailPromises);
+      return pokemonWithDetails;
     } catch (error) {
       throw error;
     }
   },
 );
 
-const postSlice = createSlice({
-  name: 'posts',
-  initialState: {data: [], status: 'idle'},
+const pokemonSlice = createSlice({
+  name: 'pokemon',
+  initialState: {
+    data: [],
+    status: 'idle',
+    error: null,
+  },
   reducers: {},
   extraReducers: builder => {
     builder
       .addCase(fetchPokemon.pending, state => {
         state.status = 'loading';
+        state.error = null;
       })
       .addCase(fetchPokemon.fulfilled, (state, action) => {
         state.status = 'succeeded';
@@ -31,8 +50,12 @@ const postSlice = createSlice({
       })
       .addCase(fetchPokemon.rejected, state => {
         state.status = 'failed';
+        state.error = action.error.message;
       });
   },
 });
 
-export default postSlice.reducer;
+export default pokemonSlice.reducer;
+export const selectAllPokemon = state => state.pokemon.data;
+export const selectStatus = state => state.pokemon.status;
+export const selectError = state => state.pokemon.error;
