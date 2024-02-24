@@ -1,35 +1,50 @@
-import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {Colors} from '../../themes/Colors';
-import {generatePercenWidth} from '../../themes/Sizes';
 import {useThemes} from '../../themes/ThemeProvider';
 import {ImagePokeBall} from '../../assets';
 
-const CardItem = React.memo(
-  ({item}) => {
+const SelectedCard = React.memo(
+  ({
+    item,
+    selectedPokemon1,
+    selectedPokemon2,
+    setSelectedPokemon1,
+    setSelectedPokemon2,
+    closeModal,
+  }) => {
     const {theme} = useThemes();
-    const navigation = useNavigation();
 
-    const handleDetail = value => {
-      navigation.navigate('Detail', {pokemonName: value.name});
+    const handleSelected = pokemon => {
+      if (!selectedPokemon1 && !selectedPokemon2) {
+        setSelectedPokemon1(pokemon);
+        setSelectedPokemon2(null);
+      } else if (selectedPokemon1 && selectedPokemon2) {
+        setSelectedPokemon1(pokemon);
+        setSelectedPokemon2(null);
+      } else if (!selectedPokemon1 && selectedPokemon2) {
+        setSelectedPokemon1(pokemon);
+      } else if (selectedPokemon1 && !selectedPokemon2) {
+        setSelectedPokemon2(pokemon);
+      }
+
+      closeModal();
     };
 
     return (
       <TouchableOpacity
-        onPress={() => handleDetail(item)}
+        onPress={() => handleSelected(item)}
         activeOpacity={0.7}
-        style={styles.container(theme, item.type)}>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>{item.name.toUpperCase()}</Text>
+        style={styles.containerCard(theme, item.type)}>
+        <View>
+          <Text>{item.name.toUpperCase()}</Text>
         </View>
         <FastImage
           style={{width: 120, height: 120}}
           source={{uri: `${item.image}`, priority: FastImage.priority.high}}
           resizeMode={FastImage.resizeMode.cover}
         />
-
         <Image
           source={ImagePokeBall}
           style={[
@@ -40,19 +55,14 @@ const CardItem = React.memo(
       </TouchableOpacity>
     );
   },
-  (prevProps, nextProps) => {
-    return prevProps.item.id === nextProps.item.id;
-  },
 );
 
-export default CardItem;
+export default SelectedCard;
 
 const styles = StyleSheet.create({
-  container: (theme, color) => ({
+  containerCard: (theme, color) => ({
     backgroundColor: Colors[color],
     justifyContent: 'space-between',
-    width: generatePercenWidth(90),
-    height: generatePercenWidth(40),
     marginHorizontal: 18,
     marginBottom: 20,
     padding: 20,
@@ -64,24 +74,11 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     shadowColor: 'black',
     borderColor: 'rgba(0,0,0,0.200)',
-    position: 'relative',
   }),
   pokeballImage: {
     position: 'absolute',
     bottom: 0,
     right: 0,
     resizeMode: 'contain',
-  },
-  textContainer: {},
-  text: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-  loadingIndicator: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    zIndex: 1,
   },
 });

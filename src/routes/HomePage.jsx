@@ -1,7 +1,10 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import * as React from 'react';
 import {Detail, Home} from '../pages';
+import {enableScreens} from 'react-native-screens';
 
+
+enableScreens();
 const HomeStack = createStackNavigator();
 
 const HomePage = () => {

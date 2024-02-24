@@ -16,6 +16,7 @@ const HomePage = () => {
   const {theme} = useThemes();
   const dispatch = useDispatch();
   const pokemonList = useSelector(selectAllPokemon);
+  const totalData = useSelector(state => state.pokemon.totalData);
   const status = useSelector(selectStatus);
   const error = useSelector(selectError);
 
@@ -27,11 +28,15 @@ const HomePage = () => {
 
   const handleEndReached = useCallback(
     e => {
-      if (e.distanceFromEnd === 0 && status !== 'loading') {
+      if (
+        e.distanceFromEnd === 0 &&
+        status !== 'loading' &&
+        pokemonList.length <= totalData
+      ) {
         dispatch(fetchPokemon({limit: 25, offset: pokemonList.length}));
       }
     },
-    [dispatch, pokemonList.length, status],
+    [dispatch, pokemonList.length, status, totalData],
   );
 
   const handleRetry = () => {
@@ -54,15 +59,17 @@ const HomePage = () => {
           renderItem={({item}) => <CardItem item={item} />}
           onEndReached={handleEndReached}
           onEndReachedThreshold={0}
-          initialNumToRender={25}
-          maxToRenderPerBatch={25}
-          windowSize={25}
+          initialNumToRender={10}
+          maxToRenderPerBatch={10}
+          windowSize={10}
           showsVerticalScrollIndicator={false}
           scrollEventThrottle={16}
           contentContainerStyle={{
             paddingVertical: 10,
           }}
           ListFooterComponent={status === 'loading' ? <LoadingView /> : null}
+          removeClippedSubviews={true}
+          decelerationRate="fast"
         />
       )}
     </SafeAreaView>

@@ -44,7 +44,7 @@ export const fetchPokemon = createAsyncThunk(
         return {
           id: detailResponse.data.id,
           name: detailResponse.data.name,
-          image: detailResponse.data.sprites.other.dream_world.front_default,
+          image: detailResponse.data.sprites.front_default,
           type: detailResponse.data.types[0].type.name,
           information: {
             height: detailResponse.data.height,
@@ -77,6 +77,7 @@ const pokemonSlice = createSlice({
     data: [],
     status: 'idle',
     filteredData: {},
+    totalData: 0,
     error: null,
   },
   reducers: {
@@ -96,6 +97,10 @@ const pokemonSlice = createSlice({
       .addCase(fetchPokemon.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = [...state.data, ...action.payload];
+        state.totalData =
+          action.payload.length > 0
+            ? state.totalData + action.payload.length
+            : state.totalData;
       })
       .addCase(fetchPokemon.rejected, state => {
         state.status = 'failed';
