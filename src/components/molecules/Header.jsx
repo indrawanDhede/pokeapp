@@ -17,10 +17,12 @@ export default Header;
 const styles = StyleSheet.create({
   container: {
     width: generatePercenWidth(100),
-    height: generateRatioHeight(16),
+    height: generateRatioHeight(30),
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
   },
   text: {
     fontSize: 18,
