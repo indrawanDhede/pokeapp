@@ -27,7 +27,11 @@ const MainAppScreen = () => {
         options={{
           tabBarLabel: 'Compare',
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+            <MaterialCommunityIcons
+              name="compare-horizontal"
+              color={color}
+              size={size}
+            />
           ),
         }}
       />
