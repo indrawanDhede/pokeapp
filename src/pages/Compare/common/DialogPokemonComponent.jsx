@@ -7,6 +7,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectAllPokemon} from '../../../libs/redux/pokemon';
 import {DialogCard} from '../../../components';
+import {Colors} from '../../../themes/Colors';
 
 const DialogPokemonComponent = ({handleSelected}) => {
   const bottomSheetRef = useRef(null);
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
   container: {
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    shadowColor: '#000',
+    shadowColor: Colors.black,
     shadowOffset: {
       width: 0,
       height: -3,

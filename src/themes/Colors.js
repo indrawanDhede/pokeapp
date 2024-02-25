@@ -1,11 +1,15 @@
 export const COLOR_DEFAULT = {
   COLOR_WHITE_BLUE: 'white',
   COLOR_WHITE_NAVY: 'white',
+  COLOR_GRAY_WHITE: '#f2f2f2',
+  COLOR_GRAY_NAVY: '#f2f2f2',
 };
 
 export const COLOR_DARK = {
   COLOR_WHITE_BLUE: 'blue',
   COLOR_WHITE_NAVY: '#0d1630',
+  COLOR_GRAY_WHITE: 'white',
+  COLOR_GRAY_NAVY: '#0d1630',
 };
 
 export const Colors = {
@@ -27,4 +31,10 @@ export const Colors = {
   dragon: '#7037FF',
   ice: '#9AD6DF',
   fighting: '#D8D8D8',
+  white: 'white',
+  black: 'black',
+  gray: '#F2F2F2',
+  gray1: '#8D92A3',
+  gray2: '#f8f8f8',
+  gray5: '#020202',
 };

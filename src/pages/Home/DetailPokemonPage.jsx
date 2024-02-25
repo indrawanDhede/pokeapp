@@ -10,17 +10,19 @@ import {
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useDispatch, useSelector} from 'react-redux';
-import {ImagePokeBall} from '../../assets';
+import {IconBack} from '../../assets';
 import {filterPokemonByName} from '../../libs/redux/pokemon';
 import {Colors} from '../../themes/Colors';
 import DetailTab from './common/DetailTab';
+import {useThemes} from '../../themes/ThemeProvider';
 
 const DetailPokemonPage = ({route}) => {
   const navigation = useNavigation();
+  const {theme} = useThemes();
   const {pokemonName} = route.params;
   const dispatch = useDispatch();
   const filterPokemon = useSelector(state => state.pokemon.filteredData);
-  const [color, setColor] = useState('white');
+  const [color, setColor] = useState('skyblue');
 
   useEffect(() => {
     if (route.params) {
@@ -33,22 +35,14 @@ const DetailPokemonPage = ({route}) => {
   }, [dispatch, pokemonName, filterPokemon]);
 
   return (
-    <SafeAreaView style={[styles.container, {backgroundColor: color}]}>
+    <SafeAreaView style={styles.container(color)}>
       <TouchableOpacity
         onPress={() => navigation.goBack()}
         style={styles.backButton}>
-        <Image
-          source={require('../../assets/icons/back.png')}
-          style={styles.backIcon}
-        />
+        <Image source={IconBack} style={styles.backIcon} />
       </TouchableOpacity>
 
       <View style={styles.headerContent}>
-        <Image
-          style={[styles.backgroundImage, styles.pokemonImage]}
-          source={ImagePokeBall}
-          resizeMode="cover"
-        />
         <FastImage
           key={filterPokemon.image}
           style={styles.pokemonImage}
@@ -71,9 +65,10 @@ const DetailPokemonPage = ({route}) => {
 export default DetailPokemonPage;
 
 const styles = StyleSheet.create({
-  container: {
+  container: color => ({
     flex: 1,
-  },
+    backgroundColor: color,
+  }),
   backButton: {
     marginHorizontal: 24,
     marginTop: 20,
@@ -81,7 +76,7 @@ const styles = StyleSheet.create({
   backIcon: {
     height: 24,
     width: 24,
-    tintColor: 'white',
+    tintColor: Colors.white,
   },
   headerContent: {
     flex: 1,
@@ -89,7 +84,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    color: 'white',
+    color: Colors.white,
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
@@ -100,16 +95,9 @@ const styles = StyleSheet.create({
   },
   detailContainer: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     padding: 20,
-  },
-  backgroundImage: {
-    position: 'absolute',
-    top: 0,
-    zIndex: -1,
-    opacity: 0.7,
-    tintColor: 'rgba(192, 192, 192, 0.5)',
   },
 });

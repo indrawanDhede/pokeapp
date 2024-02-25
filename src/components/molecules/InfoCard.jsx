@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
+import {Colors} from '../../themes/Colors';
 
 const InfoCard = ({title, desc}) => {
   return (
@@ -27,13 +28,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    color: 'black',
+    color: Colors.black,
   },
   descContainer: {
     flex: 1,
   },
   desc: {
     fontSize: 16,
-    color: 'black',
+    color: Colors.black,
   },
 });

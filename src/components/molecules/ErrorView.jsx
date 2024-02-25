@@ -7,7 +7,10 @@ const ErrorView = ({error, handleRetry}) => {
 
   return (
     <View style={styles.container(theme)}>
-      <Text>{`Error: ${error}`}</Text>
+      <Text
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        numberOfLines={3}>{`Error: ${error}`}</Text>
       <Button title="Retry" onPress={handleRetry} />
     </View>
   );
@@ -20,6 +23,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: theme.COLOR_BG,
+    backgroundColor: theme.COLOR_WHITE_NAVY,
   }),
 });

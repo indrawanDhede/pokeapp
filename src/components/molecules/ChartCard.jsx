@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     width: generatePercenWidth(40),
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 12,
-    color: 'black',
+    color: Colors.black,
   },
 });

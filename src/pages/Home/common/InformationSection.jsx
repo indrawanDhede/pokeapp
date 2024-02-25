@@ -1,5 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 import {InfoCard} from '../../../components';
+import {Colors} from '../../../themes/Colors';
 
 const InformationSection = ({data}) => {
   return (
@@ -17,7 +18,7 @@ export default InformationSection;
 const styles = StyleSheet.create({
   conatiner: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
     marginTop: 20,
   },
 });

@@ -1,8 +1,9 @@
 import React from 'react';
-import {FlatList, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Modal from 'react-native-modal';
 import {useSelector} from 'react-redux';
 import {selectAllPokemon} from '../../libs/redux/pokemon';
+import {Colors} from '../../themes/Colors';
 
 const ModalSelected = ({visible, closeModal, setSelected}) => {
   const pokemonList = useSelector(selectAllPokemon);
@@ -19,25 +20,11 @@ const ModalSelected = ({visible, closeModal, setSelected}) => {
       onBackdropPress={closeModal}
       onBackButtonPress={closeModal}
       style={{backgroundColor: 'white', paddingBottom: 20}}>
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: 20,
-        }}>
-        <Text
-          style={{
-            color: 'black',
-            fontSize: 20,
-            fontWeight: 'bold',
-          }}>
-          Choose Pokemon
-        </Text>
+      <View style={styles.container}>
+        <Text style={styles.textContainer}>Choose Pokemon</Text>
       </View>
 
-      <TouchableOpacity
-        onPress={closeModal}
-        style={{position: 'absolute', top: 10, right: 10}}>
+      <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>X</Text>
       </TouchableOpacity>
 
@@ -46,14 +33,9 @@ const ModalSelected = ({visible, closeModal, setSelected}) => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({item}) => (
           <TouchableOpacity
-            style={{
-              padding: 20,
-              borderBottomWidth: 1,
-              borderBottomColor: '#ccc',
-              backgroundColor: '#f8f8f8',
-            }}
+            style={styles.content}
             onPress={() => handleSelect(item)}>
-            <Text style={{fontSize: 16, color: 'black'}}>{item.name}</Text>
+            <Text style={styles.textContent}>{item.name}</Text>
           </TouchableOpacity>
         )}
         initialNumToRender={25}
@@ -73,3 +55,31 @@ const ModalSelected = ({visible, closeModal, setSelected}) => {
 };
 
 export default ModalSelected;
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  textContainer: {
+    color: Colors.black,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+  },
+  content: {
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    backgroundColor: Colors.gray2,
+  },
+  textContent: {
+    fontSize: 16,
+    color: Colors.black,
+  },
+});

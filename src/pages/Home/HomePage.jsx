@@ -82,5 +82,6 @@ export default HomePage;
 const styles = StyleSheet.create({
   container: theme => ({
     flex: 1,
+    backgroundColor: theme.COLOR_GRAY_NAVY,
   }),
 });

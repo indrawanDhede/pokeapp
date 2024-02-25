@@ -2,14 +2,12 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import {ImagePokeBall} from '../../assets';
 import {Colors} from '../../themes/Colors';
 import {generatePercenWidth} from '../../themes/Sizes';
-import {useThemes} from '../../themes/ThemeProvider';
-import {ImagePokeBall} from '../../assets';
 
 const CardItem = React.memo(
   ({item}) => {
-    const {theme} = useThemes();
     const navigation = useNavigation();
 
     const handleDetail = value => {
@@ -19,10 +17,12 @@ const CardItem = React.memo(
     return (
       <TouchableOpacity
         onPress={() => handleDetail(item)}
-        activeOpacity={0.7}
-        style={styles.container(theme, item.type)}>
+        activeOpacity={0.6}
+        style={styles.container(item.type)}>
         <View style={styles.textContainer}>
-          <Text style={styles.text}>{item.name}</Text>
+          <Text allowFontScaling={false} style={styles.text}>
+            {item.name}
+          </Text>
         </View>
 
         <FastImage
@@ -49,7 +49,7 @@ const CardItem = React.memo(
 export default CardItem;
 
 const styles = StyleSheet.create({
-  container: (theme, color) => ({
+  container: color => ({
     backgroundColor: Colors[color],
     justifyContent: 'space-between',
     width: generatePercenWidth(90),
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     elevation: 4,
     borderWidth: 0.5,
-    shadowColor: 'black',
+    shadowColor: Colors.black,
     borderColor: 'rgba(0,0,0,0.200)',
     position: 'relative',
   }),
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   text: {
-    color: 'white',
+    color: Colors.white,
     fontWeight: 'bold',
     fontSize: 18,
   },

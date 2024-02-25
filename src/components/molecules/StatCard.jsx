@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Statline} from '.';
+import {Colors} from '../../themes/Colors';
 
 const StatCard = ({title, number, color}) => {
   return (
@@ -32,14 +33,14 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     fontSize: 16,
-    color: 'black',
+    color: Colors.black,
   },
-  berContainer: {
+  numberContainer: {
     width: 50,
   },
   textNumber: {
     fontSize: 16,
-    color: 'black',
+    color: Colors.black,
   },
   statlineContainer: {
     flex: 1,

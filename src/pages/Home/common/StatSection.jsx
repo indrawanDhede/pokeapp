@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {StatCard} from '../../../components';
+import {Colors} from '../../../themes/Colors';
 
 const StatSection = ({data}) => {
   return (
@@ -34,7 +35,7 @@ export default StatSection;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
   },
   statContainer: {
     flex: 1,

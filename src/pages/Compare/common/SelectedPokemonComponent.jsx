@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {ModalSelected} from '../../../components';
-import {generatePercenHeight, generatePercenWidth} from '../../../themes/Sizes';
+import {Colors} from '../../../themes/Colors';
 
 const SelectedPokemonComponent = ({
   selectedPokemon,
@@ -60,13 +60,13 @@ const styles = StyleSheet.create({
   selectedPokemonContainer: {
     flex: 1,
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: Colors.black,
     padding: 16,
     alignItems: 'center',
   },
   textName: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: 'black',
+    color: Colors.black,
   },
 });

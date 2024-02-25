@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     elevation: 4,
     borderWidth: 0.5,
-    shadowColor: 'black',
+    shadowColor: Colors.black,
     borderColor: 'rgba(0,0,0,0.200)',
     position: 'relative',
   }),
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   text: {
-    color: 'white',
+    color: Colors.white,
     fontWeight: 'bold',
     fontSize: 18,
   },

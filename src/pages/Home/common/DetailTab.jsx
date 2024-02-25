@@ -10,6 +10,7 @@ import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import InformationSection from './InformationSection';
 import StatSection from './StatSection';
 import AbilitiesSection from './AbilitiesSection';
+import {Colors} from '../../../themes/Colors';
 
 const renderScene = SceneMap({
   Information: props => (
@@ -55,7 +56,6 @@ const DetailTab = ({data}) => {
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={{width: layout.width}}
-      style={{backgroundColor: 'white'}}
     />
   );
 };
@@ -64,20 +64,20 @@ export default DetailTab;
 
 const styles = StyleSheet.create({
   indicator: {
-    backgroundColor: '#020202',
+    backgroundColor: Colors.gray5,
   },
   renderTab: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
     elevation: 0,
     shadowOpacity: 0,
-    borderBottomColor: '#F2F2F2',
+    borderBottomColor: Colors.gray,
     borderBottomWidth: 1,
   },
   widthTab: {width: 'auto'},
   color: focused => ({
-    color: focused ? '#020202' : '#8D92A3',
+    color: focused ? Colors.gray5 : Colors.gray1,
     paddingHorizontal: 20,
   }),
   renderRoute: {paddingTop: 8},
-  tabView: {backgroundColor: 'white'},
+  tabView: {backgroundColor: Colors.white},
 });

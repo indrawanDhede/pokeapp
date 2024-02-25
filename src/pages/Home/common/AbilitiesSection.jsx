@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, View, Text, StyleSheet} from 'react-native';
+import {Colors} from '../../../themes/Colors';
 
 const AbilitiesSection = ({data}) => {
   const [abilityDetails, setAbilityDetails] = useState([]);
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
   abilityName: {
     fontWeight: 'bold',
     fontSize: 16,
-    color: 'black',
+    color: Colors.black,
   },
   abilityDescription: {
     marginTop: 5,
