@@ -1,19 +1,19 @@
+import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {
-  View,
-  Text,
   Image,
-  TouchableOpacity,
-  StyleSheet,
   SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {filterPokemonByName} from '../../libs/redux/pokemon';
-import DetailTab from './common/DetailTab';
-import {Colors} from '../../themes/Colors';
-import {useNavigation} from '@react-navigation/native';
 import FastImage from 'react-native-fast-image';
+import {useDispatch, useSelector} from 'react-redux';
 import {ImagePokeBall} from '../../assets';
+import {filterPokemonByName} from '../../libs/redux/pokemon';
+import {Colors} from '../../themes/Colors';
+import DetailTab from './common/DetailTab';
 
 const DetailPokemonPage = ({route}) => {
   const navigation = useNavigation();

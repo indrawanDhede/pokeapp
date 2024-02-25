@@ -31,7 +31,7 @@ const SelectedPokemonComponent = ({
             numberOfLines={1}
             allowFontScaling={false}
             style={styles.textName}>
-            {selectedPokemon.name.toUpperCase()}
+            {selectedPokemon.name}
           </Text>
           <FastImage
             style={{

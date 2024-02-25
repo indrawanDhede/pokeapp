@@ -11,17 +11,16 @@ const DialogCard = ({pokemon, handleSelected}) => {
       onPress={() => handleSelected(pokemon)}
       activeOpacity={0.7}
       style={styles.container(pokemon)}>
-      <View>
-        <Text>{pokemon.name.toUpperCase()}</Text>
+      <View style={styles.textContainer}>
+        <Text style={styles.text}>{pokemon.name}</Text>
       </View>
+
       <FastImage
         style={{width: 120, height: 120}}
-        source={{
-          uri: `${pokemon.image}`,
-          priority: FastImage.priority.high,
-        }}
+        source={{uri: `${pokemon.image}`, priority: FastImage.priority.high}}
         resizeMode={FastImage.resizeMode.cover}
       />
+
       <Image
         source={ImagePokeBall}
         style={[
@@ -59,5 +58,13 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     resizeMode: 'contain',
+  },
+  textContainer: {
+    flex: 1,
+  },
+  text: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18,
   },
 });

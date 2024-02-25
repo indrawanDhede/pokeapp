@@ -1,8 +1,7 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import * as React from 'react';
-import {Detail, Home} from '../pages';
 import {enableScreens} from 'react-native-screens';
-
+import {Home} from '../pages';
 
 enableScreens();
 const HomeStack = createStackNavigator();
@@ -13,14 +12,6 @@ const HomePage = () => {
       <HomeStack.Screen
         name="Home"
         component={Home}
-        options={{
-          headerShown: false,
-        }}
-      />
-
-      <HomeStack.Screen
-        name="Detail"
-        component={Detail}
         options={{
           headerShown: false,
         }}

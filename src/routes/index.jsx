@@ -4,6 +4,7 @@ import * as React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomePage from './HomePage';
 import ComparePage from './ComparePage';
+import {Detail} from '../pages';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -47,6 +48,13 @@ const Routes = () => {
       <MainStack.Screen
         name="MainApp"
         component={MainAppScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="Detail"
+        component={Detail}
         options={{
           headerShown: false,
         }}

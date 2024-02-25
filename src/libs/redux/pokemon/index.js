@@ -43,7 +43,7 @@ export const fetchPokemon = createAsyncThunk(
 
         return {
           id: detailResponse.data.id,
-          name: detailResponse.data.name,
+          name: detailResponse.data.name.toUpperCase(),
           image: detailResponse.data.sprites.front_default,
           type: detailResponse.data.types[0].type.name,
           information: {

@@ -38,6 +38,6 @@ const styles = StyleSheet.create({
   },
   statContainer: {
     flex: 1,
-    marginVertical: 12,
+    marginTop: 20,
   },
 });

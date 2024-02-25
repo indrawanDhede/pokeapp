@@ -59,17 +59,18 @@ const HomePage = () => {
           renderItem={({item}) => <CardItem item={item} />}
           onEndReached={handleEndReached}
           onEndReachedThreshold={0}
-          initialNumToRender={10}
-          maxToRenderPerBatch={10}
-          windowSize={10}
-          showsVerticalScrollIndicator={false}
+          initialNumToRender={25}
+          maxToRenderPerBatch={50}
+          windowSize={75}
+          updateCellsBatchingPeriod={100}
           scrollEventThrottle={16}
+          decelerationRate="fast"
+          removeClippedSubviews={true}
+          showsVerticalScrollIndicator={false}
           contentContainerStyle={{
             paddingVertical: 10,
           }}
           ListFooterComponent={status === 'loading' ? <LoadingView /> : null}
-          removeClippedSubviews={true}
-          decelerationRate="fast"
         />
       )}
     </SafeAreaView>

@@ -38,7 +38,7 @@ export default AbilitiesSection;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 10,
+    marginTop: 20,
   },
   abilityContainer: {
     marginBottom: 20,

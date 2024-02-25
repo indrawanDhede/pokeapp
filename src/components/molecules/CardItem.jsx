@@ -22,8 +22,9 @@ const CardItem = React.memo(
         activeOpacity={0.7}
         style={styles.container(theme, item.type)}>
         <View style={styles.textContainer}>
-          <Text style={styles.text}>{item.name.toUpperCase()}</Text>
+          <Text style={styles.text}>{item.name}</Text>
         </View>
+
         <FastImage
           style={{width: 120, height: 120}}
           source={{uri: `${item.image}`, priority: FastImage.priority.high}}
@@ -72,16 +73,12 @@ const styles = StyleSheet.create({
     right: 0,
     resizeMode: 'contain',
   },
-  textContainer: {},
+  textContainer: {
+    flex: 1,
+  },
   text: {
     color: 'white',
     fontWeight: 'bold',
     fontSize: 18,
-  },
-  loadingIndicator: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    zIndex: 1,
   },
 });

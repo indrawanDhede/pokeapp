@@ -56,11 +56,14 @@ const ModalSelected = ({visible, closeModal, setSelected}) => {
             <Text style={{fontSize: 16, color: 'black'}}>{item.name}</Text>
           </TouchableOpacity>
         )}
-        initialNumToRender={10}
-        maxToRenderPerBatch={10}
-        windowSize={10}
-        showsVerticalScrollIndicator={false}
+        initialNumToRender={25}
+        maxToRenderPerBatch={50}
+        windowSize={75}
+        updateCellsBatchingPeriod={100}
         scrollEventThrottle={16}
+        decelerationRate="fast"
+        removeClippedSubviews={true}
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingVertical: 10,
         }}
