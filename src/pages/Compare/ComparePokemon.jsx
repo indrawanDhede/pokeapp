@@ -4,6 +4,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import ChartComparisonComponent from './common/ChartComparionComponent';
 import DialogPokemonComponent from './common/DialogPokemonComponent';
 import SelectedPokemonComponent from './common/SelectedPokemonComponent';
+import {generatePercenHeight} from '../../themes/Sizes';
 
 const ComparePokemon = () => {
   const [selectedPokemon1, setSelectedPokemon1] = useState(null);
@@ -77,6 +78,8 @@ const ComparePokemon = () => {
         selectedPokemon2={selectedPokemon2}
       />
 
+      <View style={styles.footer} />
+
       <DialogPokemonComponent handleSelected={handleSelected} />
     </GestureHandlerRootView>
   );
@@ -93,5 +96,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 16,
+  },
+  footer: {
+    bottom: 0,
+    height: generatePercenHeight(15),
   },
 });

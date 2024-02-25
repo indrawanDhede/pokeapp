@@ -19,8 +19,8 @@ export default InfoCard;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
+    flex: 1,
   },
   titleContainer: {
     width: 100,

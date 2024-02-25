@@ -48,7 +48,6 @@ const ChartComparisonComponent = ({selectedPokemon1, selectedPokemon2}) => {
         style={[
           styles.chartContainer,
           {
-            height: generatePercenHeight(65),
             justifyContent: 'center',
             alignItems: 'center',
           },
@@ -63,6 +62,7 @@ export default ChartComparisonComponent;
 
 const styles = StyleSheet.create({
   chartContainer: {
+    flex: 1,
     borderWidth: 1,
     borderColor: 'black',
     marginBottom: 10,

@@ -37,13 +37,8 @@ export default AbilitiesSection;
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    flex: 1,
     paddingVertical: 10,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 10,
   },
   abilityContainer: {
     marginBottom: 20,

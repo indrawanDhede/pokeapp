@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {ModalSelected} from '../../../components';
+import {generatePercenHeight, generatePercenWidth} from '../../../themes/Sizes';
 
 const SelectedPokemonComponent = ({
   selectedPokemon,
@@ -14,6 +15,7 @@ const SelectedPokemonComponent = ({
   return (
     <TouchableOpacity
       style={styles.selectedPokemonContainer}
+      activeOpacity={0.4}
       onPress={() => openDialog(identifier)}>
       <ModalSelected
         visible={isModalVisible}
@@ -24,11 +26,18 @@ const SelectedPokemonComponent = ({
 
       {selectedPokemon ? (
         <>
-          <Text style={styles.selectedPokemonName}>
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={1}
+            allowFontScaling={false}
+            style={styles.textName}>
             {selectedPokemon.name.toUpperCase()}
           </Text>
           <FastImage
-            style={{width: 100, height: 100}}
+            style={{
+              width: 90,
+              height: 90,
+            }}
             source={{
               uri: `${selectedPokemon.image}`,
               priority: FastImage.priority.high,
@@ -37,7 +46,9 @@ const SelectedPokemonComponent = ({
           />
         </>
       ) : (
-        <Text>Select Pokemon</Text>
+        <Text allowFontScaling={false} style={styles.textName}>
+          Select Pokemon
+        </Text>
       )}
     </TouchableOpacity>
   );
@@ -53,9 +64,9 @@ const styles = StyleSheet.create({
     padding: 16,
     alignItems: 'center',
   },
-  selectedPokemonName: {
-    fontSize: 16,
+  textName: {
+    fontSize: 14,
     fontWeight: 'bold',
-    marginBottom: 8,
+    color: 'black',
   },
 });

@@ -13,6 +13,7 @@ import DetailTab from './common/DetailTab';
 import {Colors} from '../../themes/Colors';
 import {useNavigation} from '@react-navigation/native';
 import FastImage from 'react-native-fast-image';
+import {ImagePokeBall} from '../../assets';
 
 const DetailPokemonPage = ({route}) => {
   const navigation = useNavigation();
@@ -33,29 +34,31 @@ const DetailPokemonPage = ({route}) => {
 
   return (
     <SafeAreaView style={[styles.container, {backgroundColor: color}]}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.backButton}>
-          <Image
-            source={require('../../assets/icons/back.png')}
-            style={styles.backIcon}
-          />
-        </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={styles.backButton}>
+        <Image
+          source={require('../../assets/icons/back.png')}
+          style={styles.backIcon}
+        />
+      </TouchableOpacity>
 
-        <View style={styles.headerContent}>
-          <Text style={styles.title}>{filterPokemon.name}</Text>
-
-          <FastImage
-            key={filterPokemon.image}
-            style={styles.pokemonImage}
-            source={{
-              uri: `${filterPokemon.image}`,
-              priority: FastImage.priority.high,
-            }}
-            resizeMode={FastImage.resizeMode.cover}
-          />
-        </View>
+      <View style={styles.headerContent}>
+        <Image
+          style={[styles.backgroundImage, styles.pokemonImage]}
+          source={ImagePokeBall}
+          resizeMode="cover"
+        />
+        <FastImage
+          key={filterPokemon.image}
+          style={styles.pokemonImage}
+          source={{
+            uri: `${filterPokemon.image}`,
+            priority: FastImage.priority.high,
+          }}
+          resizeMode={FastImage.resizeMode.cover}
+        />
+        <Text style={styles.title}>{filterPokemon.name}</Text>
       </View>
 
       <View style={styles.detailContainer}>
@@ -71,9 +74,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  header: {
-    flex: 1,
-  },
   backButton: {
     marginHorizontal: 24,
     marginTop: 20,
@@ -84,18 +84,19 @@ const styles = StyleSheet.create({
     tintColor: 'white',
   },
   headerContent: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 40,
   },
   title: {
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
+    marginBottom: 10,
   },
   pokemonImage: {
-    width: 160,
-    height: 160,
+    width: 180,
+    height: 180,
   },
   detailContainer: {
     flex: 1,
@@ -103,5 +104,12 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     padding: 20,
+  },
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    zIndex: -1,
+    opacity: 0.7,
+    tintColor: 'rgba(192, 192, 192, 0.5)',
   },
 });
