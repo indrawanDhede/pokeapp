@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {ChartCard} from '../../../components';
+import {generatePercenHeight} from '../../../themes/Sizes';
 
 const ChartComparisonComponent = ({selectedPokemon1, selectedPokemon2}) => {
   if (selectedPokemon1 && selectedPokemon2) {
@@ -46,7 +47,11 @@ const ChartComparisonComponent = ({selectedPokemon1, selectedPokemon2}) => {
       <View
         style={[
           styles.chartContainer,
-          {justifyContent: 'center', alignItems: 'center'},
+          {
+            height: generatePercenHeight(65),
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
         ]}>
         <Text>Select two Pokemon to compare</Text>
       </View>
@@ -58,7 +63,6 @@ export default ChartComparisonComponent;
 
 const styles = StyleSheet.create({
   chartContainer: {
-    flex: 1,
     borderWidth: 1,
     borderColor: 'black',
     marginBottom: 10,

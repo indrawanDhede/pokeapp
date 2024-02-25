@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import ChartComparisonComponent from './common/ChartComparionComponent';
 import DialogPokemonComponent from './common/DialogPokemonComponent';
 import SelectedPokemonComponent from './common/SelectedPokemonComponent';
@@ -10,7 +11,6 @@ const ComparePokemon = () => {
 
   const [isModalVisible1, setModalVisible1] = useState(false);
   const [isModalVisible2, setModalVisible2] = useState(false);
-  const [isModalVisible3, setModalVisible3] = useState(false);
 
   const openModal1 = () => {
     setModalVisible1(true);
@@ -28,31 +28,30 @@ const ComparePokemon = () => {
     setModalVisible2(false);
   };
 
-  const openModal3 = () => {
-    setModalVisible3(true);
-  };
-
-  const closeModal3 = () => {
-    setModalVisible3(false);
-  };
-
   const openDialog = identifier => {
     if (identifier === 'modal1') {
       openModal1();
     } else if (identifier === 'modal2') {
       openModal2();
-    } else if (identifier === 'modal3') {
-      openModal3();
     }
   };
 
-  const handleClear = () => {
-    setSelectedPokemon1(null);
-    setSelectedPokemon2(null);
+  const handleSelected = pokemon => {
+    if (!selectedPokemon1 && !selectedPokemon2) {
+      setSelectedPokemon1(pokemon);
+      setSelectedPokemon2(null);
+    } else if (selectedPokemon1 && selectedPokemon2) {
+      setSelectedPokemon1(pokemon);
+      setSelectedPokemon2(null);
+    } else if (!selectedPokemon1 && selectedPokemon2) {
+      setSelectedPokemon1(pokemon);
+    } else if (selectedPokemon1 && !selectedPokemon2) {
+      setSelectedPokemon2(pokemon);
+    }
   };
 
   return (
-    <View style={styles.container}>
+    <GestureHandlerRootView style={styles.container}>
       <View style={styles.selectedPokemonSection}>
         <SelectedPokemonComponent
           selectedPokemon={selectedPokemon1}
@@ -78,23 +77,8 @@ const ComparePokemon = () => {
         selectedPokemon2={selectedPokemon2}
       />
 
-      <DialogPokemonComponent
-        selectedPokemon1={selectedPokemon1}
-        selectedPokemon2={selectedPokemon2}
-        setSelectedPokemon1={setSelectedPokemon1}
-        setSelectedPokemon2={setSelectedPokemon2}
-        isModalVisible={isModalVisible3}
-        closeModal={closeModal3}
-        openDialog={() => openDialog('modal3')}
-        identifier="modal3"
-      />
-
-      <TouchableOpacity
-        onPress={() => handleClear()}
-        style={styles.buttonClear}>
-        <Text style={styles.textClear}>Clear</Text>
-      </TouchableOpacity>
-    </View>
+      <DialogPokemonComponent handleSelected={handleSelected} />
+    </GestureHandlerRootView>
   );
 };
 
@@ -109,15 +93,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 16,
-  },
-  buttonClear: {
-    marginTop: 10,
-    padding: 12,
-    backgroundColor: 'lightblue',
-    alignItems: 'center',
-    borderRadius: 8,
-  },
-  textClear: {
-    color: 'black',
   },
 });

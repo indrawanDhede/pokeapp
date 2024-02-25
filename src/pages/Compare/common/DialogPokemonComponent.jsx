@@ -1,41 +1,62 @@
-import React from 'react';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {ModalDialog} from '../../../components';
+import BottomSheet, {
+  BottomSheetFlatList,
+  BottomSheetVirtualizedList,
+} from '@gorhom/bottom-sheet';
+import React, {useMemo, useRef} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {useSelector} from 'react-redux';
+import {selectAllPokemon} from '../../../libs/redux/pokemon';
+import {DialogCard} from '../../../components';
 
-const DialogPokemonComponent = ({
-  selectedPokemon1,
-  selectedPokemon2,
-  setSelectedPokemon1,
-  setSelectedPokemon2,
-  isModalVisible,
-  closeModal,
-  openDialog,
-  identifier,
-}) => {
+const DialogPokemonComponent = ({handleSelected}) => {
+  const bottomSheetRef = useRef(null);
+
+  const snapPoints = useMemo(() => ['15%', '50%', '75%'], []);
+
+  const pokemonList = useSelector(selectAllPokemon);
+
   return (
-    <TouchableOpacity
-      style={styles.showListButton}
-      onPress={() => openDialog(identifier)}>
-      <Text style={{color: 'black'}}>Choose Pokemon</Text>
-      <ModalDialog
-        selectedPokemon1={selectedPokemon1}
-        selectedPokemon2={selectedPokemon2}
-        setSelectedPokemon1={setSelectedPokemon1}
-        setSelectedPokemon2={setSelectedPokemon2}
-        visible={isModalVisible}
-        closeModal={closeModal}
+    <BottomSheet
+      ref={bottomSheetRef}
+      index={1}
+      snapPoints={snapPoints}
+      style={styles.container}>
+      <BottomSheetVirtualizedList
+        data={pokemonList}
+        keyExtractor={(item, index) => index.toString()}
+        getItemCount={pokemonList => pokemonList.length}
+        getItem={(pokemonList, index) => pokemonList[index]}
+        ListHeaderComponent={() => (
+          <View style={{marginBottom: 10}}>
+            <Text style={styles.textHeader}>Choose Pokemon</Text>
+          </View>
+        )}
+        renderItem={({item}) => (
+          <DialogCard pokemon={item} handleSelected={handleSelected} />
+        )}
+        contentContainerStyle={styles.contentContainer}
       />
-    </TouchableOpacity>
+    </BottomSheet>
   );
 };
 
 export default DialogPokemonComponent;
 
 const styles = StyleSheet.create({
-  showListButton: {
-    padding: 12,
-    backgroundColor: 'lightblue',
-    alignItems: 'center',
-    borderRadius: 8,
+  container: {
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: -3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
   },
+  contentContainer: {
+    alignItems: 'center',
+  },
+  textHeader: {color: 'black', fontSize: 18, fontWeight: 'bold'},
 });

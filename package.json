@@ -11,6 +11,7 @@
     "build-android": "npx react-native run-android --mode=release"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^4",
     "@react-native-masked-view/masked-view": "^0.3.1",
     "@react-navigation/bottom-tabs": "^6.5.12",
     "@react-navigation/native": "^6.1.10",
@@ -23,6 +24,7 @@
     "react-native-gesture-handler": "^2.15.0",
     "react-native-modal": "^13.0.1",
     "react-native-pager-view": "^6.2.3",
+    "react-native-reanimated": "^3.6.1",
     "react-native-safe-area-context": "^4.9.0",
     "react-native-screens": "^3.29.0",
     "react-native-tab-view": "^3.5.2",

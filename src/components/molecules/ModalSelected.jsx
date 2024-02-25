@@ -1,33 +1,11 @@
-import React, {useCallback, useEffect} from 'react';
+import React from 'react';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import Modal from 'react-native-modal';
-import {useDispatch, useSelector} from 'react-redux';
-import {
-  fetchPokemon,
-  selectAllPokemon,
-  selectStatus,
-} from '../../libs/redux/pokemon';
-import {LoadingView} from '.';
+import {useSelector} from 'react-redux';
+import {selectAllPokemon} from '../../libs/redux/pokemon';
 
 const ModalSelected = ({visible, closeModal, setSelected}) => {
-  const dispatch = useDispatch();
   const pokemonList = useSelector(selectAllPokemon);
-  const status = useSelector(selectStatus);
-
-  useEffect(() => {
-    if (!pokemonList || pokemonList.length === 0) {
-      dispatch(fetchPokemon({limit: 25, offset: 0}));
-    }
-  }, [dispatch, pokemonList]);
-
-  const handleEndReached = useCallback(
-    e => {
-      if (e.distanceFromEnd === 0 && status !== 'loading') {
-        dispatch(fetchPokemon({limit: 25, offset: pokemonList.length}));
-      }
-    },
-    [dispatch, pokemonList.length, status],
-  );
 
   const handleSelect = pokemon => {
     setSelected(pokemon);
@@ -78,17 +56,14 @@ const ModalSelected = ({visible, closeModal, setSelected}) => {
             <Text style={{fontSize: 16, color: 'black'}}>{item.name}</Text>
           </TouchableOpacity>
         )}
-        onEndReached={handleEndReached}
-        onEndReachedThreshold={0}
-        initialNumToRender={25}
-        maxToRenderPerBatch={25}
-        windowSize={25}
+        initialNumToRender={10}
+        maxToRenderPerBatch={10}
+        windowSize={10}
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
         contentContainerStyle={{
           paddingVertical: 10,
         }}
-        ListFooterComponent={status === 'loading' ? <LoadingView /> : null}
       />
     </Modal>
   );

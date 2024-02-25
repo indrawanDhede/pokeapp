@@ -6,6 +6,5 @@ export {default as InfoCard} from './InfoCard';
 export {default as Statline} from './Statline';
 export {default as StatCard} from './StatCard';
 export {default as ChartCard} from './ChartCard';
-export {default as ModalDialog} from './ModalDialog';
 export {default as ModalSelected} from './ModalSelected';
-export {default as SelectedCard} from './SelectedCard';
+export {default as DialogCard} from './DialogCard';
