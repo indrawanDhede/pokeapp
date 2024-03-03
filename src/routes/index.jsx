@@ -1,10 +1,14 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import * as React from 'react';
+import BootSplash from 'react-native-bootsplash';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import HomePage from './HomePage';
-import ComparePage from './ComparePage';
+import {useSelector} from 'react-redux';
 import {Detail} from '../pages';
+import LoginScreen from '../pages/auth/LoginScreen';
+import ComparePage from './ComparePage';
+import HomePage from './HomePage';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -40,26 +44,48 @@ const MainAppScreen = () => {
   );
 };
 
-const MainStack = createStackNavigator();
+const AppStack = createStackNavigator();
 
-const Routes = () => {
+const AppStackNavigation = () => {
   return (
-    <MainStack.Navigator>
-      <MainStack.Screen
+    <AppStack.Navigator>
+      <AppStack.Screen
         name="MainApp"
         component={MainAppScreen}
         options={{
           headerShown: false,
         }}
       />
-      <MainStack.Screen
+      <AppStack.Screen
         name="Detail"
         component={Detail}
         options={{
           headerShown: false,
         }}
       />
-    </MainStack.Navigator>
+    </AppStack.Navigator>
+  );
+};
+
+const AuthStack = createStackNavigator();
+
+const AuthStackNavigation = () => {
+  return (
+    <AuthStack.Navigator>
+      <AuthStack.Screen name="Login" component={LoginScreen} />
+    </AuthStack.Navigator>
+  );
+};
+const Routes = () => {
+  const {data: user} = useSelector(state => state.user);
+
+  return (
+    <NavigationContainer
+      onReady={() => {
+        BootSplash.hide();
+      }}>
+      {user ? <AppStackNavigation /> : <AuthStackNavigation />}
+    </NavigationContainer>
   );
 };
 

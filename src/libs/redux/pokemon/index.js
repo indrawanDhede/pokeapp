@@ -3,12 +3,14 @@ import pokemon from '../../axios';
 import {PATH} from '../../../services/api/path';
 
 export const fetchPokemon = createAsyncThunk(
-  'posts/fetchPokemon',
+  'pokemon/list',
   async ({limit, offset}) => {
     try {
       const response = await pokemon.get(
         `${PATH.POKEMON}/?limit=${limit}&offset=${offset}`,
       );
+
+      console.log('response redux', response);
 
       const pokemonList = response.data.results;
 
@@ -79,6 +81,7 @@ const pokemonSlice = createSlice({
     filteredData: {},
     totalData: 0,
     error: null,
+    information: {},
   },
   reducers: {
     filterPokemonByName: (state, action) => {
@@ -86,6 +89,13 @@ const pokemonSlice = createSlice({
       state.filteredData = state.data.find(pokemon =>
         pokemon.name.toLowerCase().includes(name.toLowerCase()),
       );
+    },
+    getUrlPokemon: (state, action) => {
+      const {name} = action.payload;
+      const data = state.data.find(pokemon =>
+        pokemon.name.toLowerCase().includes(name.toLowerCase()),
+      );
+      state.information = data.information;
     },
   },
   extraReducers: builder => {
@@ -102,7 +112,7 @@ const pokemonSlice = createSlice({
             ? state.totalData + action.payload.length
             : state.totalData;
       })
-      .addCase(fetchPokemon.rejected, state => {
+      .addCase(fetchPokemon.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });
@@ -114,4 +124,4 @@ export const selectAllPokemon = state => state.pokemon.data;
 export const selectStatus = state => state.pokemon.status;
 export const selectError = state => state.pokemon.error;
 
-export const {filterPokemonByName} = pokemonSlice.actions;
+export const {filterPokemonByName, getUrlPokemon} = pokemonSlice.actions;
